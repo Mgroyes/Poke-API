@@ -17,14 +17,25 @@ export interface PokemonType {
 }
 
 export interface PokemonDetails {
-  id: number
-  name: string
-  height: number
-  weight: number
+  id: number;
+  name: string;
   sprites: {
-    front_default: string
-  }
-  types: PokemonType[]
-  stats: PokemonStat[]
-  base_experience: number
+    front_default: string;
+  };
+  types: {
+    slot: number;
+    type: {
+      name: string;
+      url: string;
+    };
+  }[];
+  weight: number;
+  height: number;
+  stats: {
+    base_stat: number;
+    stat: {
+      name: string;
+    };
+  }[];
+  base_experience: number;
 }
