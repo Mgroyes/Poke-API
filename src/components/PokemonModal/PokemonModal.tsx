@@ -10,7 +10,6 @@ type Props = {
 }
 
 const PokemonModal: React.FC<Props> = ({ isOpen, onClose, pokemon }) => {
-  // Siempre llamamos al hook, controlamos lógica dentro
   useEffect(() => {
     if (!isOpen || !pokemon) return
 
@@ -21,6 +20,13 @@ const PokemonModal: React.FC<Props> = ({ isOpen, onClose, pokemon }) => {
   }, [isOpen, pokemon])
 
   if (!isOpen || !pokemon) return null
+
+  // 🎨 Función para obtener color basado en el valor
+  const getStatColor = (value: number): string => {
+    if (value > 100) return '#4ade80' // Verde claro
+    if (value < 50) return '#f87171' // Rojo claro
+    return '#facc15' // Amarillo claro
+  }
 
   return ReactDOM.createPortal(
     <div
@@ -36,7 +42,7 @@ const PokemonModal: React.FC<Props> = ({ isOpen, onClose, pokemon }) => {
       }}
     >
       <div
-        onClick={e => e.stopPropagation()}
+        onClick={(e) => e.stopPropagation()}
         style={{
           backgroundColor: 'white',
           borderRadius: '8px',
@@ -68,18 +74,47 @@ const PokemonModal: React.FC<Props> = ({ isOpen, onClose, pokemon }) => {
         </div>
 
         <p>ID: #{pokemon.id}</p>
-        <p>Tipo(s): {pokemon.types.map(t => t.type.name).join(', ')}</p>
+        <p>Tipo(s): {pokemon.types.map((t) => t.type.name).join(', ')}</p>
         <p>Altura: {(pokemon.height / 10).toFixed(1)} m</p>
         <p>Peso: {(pokemon.weight / 10).toFixed(1)} kg</p>
 
-        <h3>Estadísticas base</h3>
-        <ul>
-          {pokemon.stats.map(s => (
-            <li key={s.stat.name}>
-              {s.stat.name}: {s.base_stat}
-            </li>
+        <h3 style={{ marginTop: '1.5rem', marginBottom: '0.5rem', fontWeight: '600' }}>
+          Estadísticas base
+        </h3>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          {pokemon.stats.map((s) => (
+            <div key={s.stat.name}>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  fontSize: '0.875rem',
+                }}
+              >
+                <span>{s.stat.name}</span>
+                <span>{s.base_stat}</span>
+              </div>
+              <div
+                style={{
+                  width: '100%',
+                  height: '8px',
+                  backgroundColor: '#e5e7eb',
+                  borderRadius: '4px',
+                }}
+              >
+                <div
+                  style={{
+                    width: `${(s.base_stat / 150) * 100}%`,
+                    height: '100%',
+                    backgroundColor: getStatColor(s.base_stat),
+                    borderRadius: '4px',
+                  }}
+                ></div>
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     </div>,
     document.body

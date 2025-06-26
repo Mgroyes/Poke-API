@@ -1,5 +1,6 @@
 import React from 'react'
 import { PokemonDetails } from '@/types/pokemon'
+import Image from 'next/image'
 
 type Props = {
   pokemon: PokemonDetails
@@ -32,7 +33,7 @@ const PokemonCard: React.FC<Props> = ({ pokemon, onClick }) => {
       >
         #{pokemon.id}
       </span>
-      <img src={pokemon.sprites.front_default} alt={pokemon.name} width={96} height={96} />
+      <Image src={pokemon.sprites.front_default} alt={pokemon.name} width={96} height={96} unoptimized />
       <h4
         style={{
           marginTop: '0.5rem',

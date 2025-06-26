@@ -1,6 +1,7 @@
 import React from 'react'
 import DataTable, { TableColumn } from 'react-data-table-component'
 import { PokemonDetails } from '@/types/pokemon'
+import Image from 'next/image'
 
 type Props = {
   data: PokemonDetails[]
@@ -8,19 +9,26 @@ type Props = {
 }
 
 const TableView: React.FC<Props> = ({ data, onOpenModal }) => {
-
-  // Mapear stats para columnas individuales
+  // Obtener el valor de una estadística específica
   const getStatValue = (stats: PokemonDetails['stats'], statName: string): number => {
     const stat = stats.find(s => s.stat.name === statName)
     return stat ? stat.base_stat : 0
   }
 
-  // Columnas
+  // Columnas de la tabla
   const columns: TableColumn<PokemonDetails>[] = [
     {
       name: 'Imagen',
       selector: row => row.sprites.front_default,
-      cell: row => <img src={row.sprites.front_default} alt={row.name} width={50} height={50} />,
+      cell: row => (
+        <Image
+          src={row.sprites.front_default}
+          alt={row.name}
+          width={50}
+          height={50}
+          unoptimized
+        />
+      ),
       sortable: false,
       width: '80px',
     },
@@ -41,13 +49,13 @@ const TableView: React.FC<Props> = ({ data, onOpenModal }) => {
     },
     {
       name: 'Peso (kg)',
-      selector: row => row.weight / 10, // API da en hectogramos
+      selector: row => row.weight / 10,
       sortable: true,
       format: row => `${row.weight / 10} kg`,
     },
     {
       name: 'Altura (m)',
-      selector: row => row.height / 10, // API da en decímetros
+      selector: row => row.height / 10,
       sortable: true,
       format: row => `${row.height / 10} m`,
     },
@@ -98,8 +106,6 @@ const TableView: React.FC<Props> = ({ data, onOpenModal }) => {
         </button>
       ),
       ignoreRowClick: true,
-      allowOverflow: true,
-      button: true,
     },
   ]
 
@@ -114,7 +120,7 @@ const TableView: React.FC<Props> = ({ data, onOpenModal }) => {
       highlightOnHover
       pointerOnHover
       dense
-      defaultSortFieldId={2} // Por ejemplo: Nombre
+      defaultSortFieldId={2}
     />
   )
 }
