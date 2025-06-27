@@ -15,11 +15,9 @@ const HomePage = () => {
   const [selectedType, setSelectedType] = useState<string | null>(null)
   const [searchTerm, setSearchTerm] = useState('')
 
-  // Paginación para Grid
   const [currentPage, setCurrentPage] = useState(1)
   const ITEMS_PER_PAGE = 20
 
-  // Reiniciar página cuando cambia el filtro o búsqueda
   useEffect(() => {
     setCurrentPage(1)
   }, [selectedType, searchTerm])
@@ -34,24 +32,20 @@ const HomePage = () => {
     setSelectedPokemon(null)
   }
 
-  if (loading) return <p className="p-4">Cargando Pokémon...</p>
+  if (loading) return <p className="p-8">Cargando Pokémon...</p>
 
-  // Obtener todos los tipos únicos
   const allTypes = Array.from(
     new Set(pokemonList.flatMap(p => p.types.map(t => t.type.name)))
   )
 
-  // Filtro por tipo
   const filteredByType = selectedType
     ? pokemonList.filter(p => p.types.some(t => t.type.name === selectedType))
     : pokemonList
 
-  // Filtro por nombre
   const searchedPokemon = filteredByType.filter(p =>
     p.name.toLowerCase().includes(searchTerm.toLowerCase())
   )
 
-  // Paginación solo para vista Grid
   const totalPages = Math.ceil(searchedPokemon.length / ITEMS_PER_PAGE)
   const paginatedData = searchedPokemon.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
@@ -59,7 +53,7 @@ const HomePage = () => {
   )
 
   return (
-    <main className="p-4">
+    <main className="mx-auto max-w-7xl p-10 sm:p-10">
       <div className="flex justify-between items-center flex-wrap gap-4 mb-4">
         <h1 className="text-2xl font-bold">Pokémon Explorer</h1>
         <button
