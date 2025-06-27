@@ -76,7 +76,7 @@ const PokemonModal: React.FC<Props> = ({ isOpen, onClose, pokemon }) => {
       />
 
       <Stack gap="md" style={{ position: 'relative', zIndex: 1 }}>
-        {/* Imagen */}
+        
         <Group justify="center" mb="sm">
           <Image
             src={pokemon.sprites.front_default}
@@ -87,7 +87,7 @@ const PokemonModal: React.FC<Props> = ({ isOpen, onClose, pokemon }) => {
           />
         </Group>
 
-        {/* ID y Tipos */}
+        
         <Group justify="space-between" px="xs">
           <Text size="sm">ID: #{pokemon.id}</Text>
           <Group gap="xs">
@@ -104,13 +104,13 @@ const PokemonModal: React.FC<Props> = ({ isOpen, onClose, pokemon }) => {
           </Group>
         </Group>
 
-        {/* Altura y Peso */}
+        
         <Stack gap={6} px="xs">
           <Text size="sm">Altura: {(pokemon.height / 10).toFixed(1)} m</Text>
           <Text size="sm">Peso: {(pokemon.weight / 10).toFixed(1)} kg</Text>
         </Stack>
 
-        {/* Estadísticas */}
+        
         <Stack gap="xs" mt="md" px="xs">
           <Text fw={600}>Estadísticas base</Text>
           {pokemon.stats.map((stat) => (

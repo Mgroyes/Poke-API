@@ -49,7 +49,7 @@ const PokemonCard: React.FC<Props> = ({ pokemon, onClick }) => {
         e.currentTarget.style.transform = ''
       }}
     >
-      {/* Fondo inferior gris extendido */}
+     
       <div
         style={{
           position: 'absolute',
@@ -66,7 +66,7 @@ const PokemonCard: React.FC<Props> = ({ pokemon, onClick }) => {
         }}
       />
 
-      {/* ID Badge */}
+      
       <Badge
         color="blue"
         variant="light"
@@ -83,7 +83,7 @@ const PokemonCard: React.FC<Props> = ({ pokemon, onClick }) => {
         #{pokemon.id}
       </Badge>
 
-      {/* Imagen */}
+      
       <Card.Section style={{ position: 'relative', height: 120, zIndex: 2 }}>
         <Image
           src={pokemon.sprites.front_default}
@@ -93,12 +93,12 @@ const PokemonCard: React.FC<Props> = ({ pokemon, onClick }) => {
         />
       </Card.Section>
 
-      {/* Nombre */}
+      
       <Text fw={700} ta="center" mt="md" style={{ textTransform: 'capitalize', zIndex: 2, position: 'relative' }}>
         {pokemon.name}
       </Text>
 
-      {/* Tipos */}
+      
       <Group justify="center" mt="sm" gap="xs" style={{ zIndex: 2, position: 'relative' }}>
         {pokemon.types.map((typeInfo) => (
           <Badge
@@ -111,7 +111,6 @@ const PokemonCard: React.FC<Props> = ({ pokemon, onClick }) => {
         ))}
       </Group>
 
-      {/* Botón Ver detalle */}
       <Group justify="center" mt="md" style={{ zIndex: 2, position: 'relative' }}>
         <Button
           size="xs"
