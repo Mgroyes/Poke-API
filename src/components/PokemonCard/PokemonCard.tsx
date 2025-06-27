@@ -18,14 +18,14 @@ const typeColors: Record<string, string> = {
   ground: 'orange',
   fairy: 'pink',
   psychic: 'violet',
-  fighting: 'red',
-  rock: 'orange',
+  fighting: 'orange',
+  rock: 'sand',
   ghost: 'indigo',
   ice: 'cyan',
   dragon: 'teal',
   dark: 'dark',
-  steel: 'gray',
-  flying: 'blue',
+  steel: 'metal',
+  flying: 'azure',
 }
 
 const PokemonCard: React.FC<Props> = ({ pokemon, onClick }) => {
@@ -59,7 +59,7 @@ const PokemonCard: React.FC<Props> = ({ pokemon, onClick }) => {
           height: '70%',
           backgroundColor: '#f1f3f5',
           borderTopLeftRadius: 10,
-          borderTopRightRadius: 10,
+          borderTopRightRadius: 0,
           borderBottomLeftRadius: 0,
           borderBottomRightRadius: 0,
           zIndex: 0,

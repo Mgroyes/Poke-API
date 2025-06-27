@@ -1,4 +1,3 @@
-// src/pages/_app.tsx
 import { MantineProvider } from '@mantine/core'
 import '@mantine/core/styles.css'
 import type { AppProps } from 'next/app'

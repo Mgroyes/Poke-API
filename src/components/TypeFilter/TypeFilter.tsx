@@ -36,7 +36,6 @@ const TypeFilter: React.FC<Props> = ({ options, selectedType, onChange }) => {
         }}
         isClearable
         placeholder="Filtrar por tipo..."
-        // 🔽 Añade estas dos props para que el menú no se corte
         menuPortalTarget={typeof window !== 'undefined' ? document.body : null}
         styles={{
           menuPortal: base => ({ ...base, zIndex: 9999 }),

@@ -13,14 +13,14 @@ const typeColors: Record<string, string> = {
   ground: 'orange',
   fairy: 'pink',
   psychic: 'violet',
-  fighting: 'red',
-  rock: 'orange',
+  fighting: 'orange',
+  rock: 'sand',
   ghost: 'indigo',
   ice: 'cyan',
   dragon: 'teal',
   dark: 'dark',
-  steel: 'gray',
-  flying: 'blue',
+  steel: 'metal',
+  flying: 'azure',
 }
 
 type Props = {
@@ -55,18 +55,18 @@ const PokemonModal: React.FC<Props> = ({ isOpen, onClose, pokemon }) => {
       size="md"
       overlayProps={{ backgroundOpacity: 0.55, blur: 3 }}
       radius="md"
-      padding={24} // Aumenta espacio general interno
+      padding={24} 
       style={{ position: 'relative' }}
     >
-      {/* Fondo gris claro desde mitad del muñeco hacia abajo */}
+      {/* Fondo gris claro extendido hacia abajo */}
       <div
         style={{
           position: 'absolute',
-          top: 150 / 2 + 56, // puedes ajustar este valor si el muñeco cambia de tamaño
+          top: 150 / 2 + 56, 
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundColor: '#f1f3f5',
+          backgroundColor: '#f1f1f1',
           borderTopLeftRadius: 30,
           borderTopRightRadius: 30,
           borderBottomLeftRadius: 0,

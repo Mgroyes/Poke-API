@@ -12,11 +12,11 @@ const GridView: React.FC<Props> = ({ data, onOpenModal }) => {
   return (
     <Grid
       gutter="lg"
-      justify="center" // centra el grid si hay espacio horizontal
+      justify="center" 
       style={{ 
-        paddingInline: '10rem',  
-        paddingBlock: '6rem', 
-      }} // aire a los lados del DOM
+        paddingInline: '5rem',  
+        paddingBlock: '4rem', 
+      }} 
     >
       {data.map(pokemon => (
         <Grid.Col
@@ -25,7 +25,7 @@ const GridView: React.FC<Props> = ({ data, onOpenModal }) => {
                   sm: 6, 
                   md: 4, 
                   lg: 3 
-                }} // ⬅️ Máximo 4 cards por fila (12 / 3)
+                }} 
         >
           <PokemonCard
             pokemon={pokemon}
