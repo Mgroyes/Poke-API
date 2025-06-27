@@ -1,7 +1,27 @@
 import React, { useEffect } from 'react'
-import ReactDOM from 'react-dom'
-import Image from 'next/image'
+import { Modal, Image, Text, Badge, Group, Progress, Stack } from '@mantine/core'
 import { PokemonDetails } from '@/types/pokemon'
+
+const typeColors: Record<string, string> = {
+  fire: 'red',
+  water: 'blue',
+  grass: 'green',
+  electric: 'yellow',
+  bug: 'lime',
+  normal: 'gray',
+  poison: 'grape',
+  ground: 'orange',
+  fairy: 'pink',
+  psychic: 'violet',
+  fighting: 'red',
+  rock: 'orange',
+  ghost: 'indigo',
+  ice: 'cyan',
+  dragon: 'teal',
+  dark: 'dark',
+  steel: 'gray',
+  flying: 'blue',
+}
 
 type Props = {
   isOpen: boolean
@@ -12,112 +32,103 @@ type Props = {
 const PokemonModal: React.FC<Props> = ({ isOpen, onClose, pokemon }) => {
   useEffect(() => {
     if (!isOpen || !pokemon) return
-
     document.body.style.overflow = 'hidden'
     return () => {
       document.body.style.overflow = 'unset'
     }
   }, [isOpen, pokemon])
 
-  if (!isOpen || !pokemon) return null
+  if (!pokemon) return null
 
-  // 🎨 Función para obtener color basado en el valor
   const getStatColor = (value: number): string => {
-    if (value > 100) return '#4ade80' // Verde claro
-    if (value < 50) return '#f87171' // Rojo claro
-    return '#facc15' // Amarillo claro
+    if (value > 100) return '#4ade80'
+    if (value < 50) return '#f87171'
+    return '#facc15'
   }
 
-  return ReactDOM.createPortal(
-    <div
-      onClick={onClose}
-      style={{
-        position: 'fixed',
-        inset: 0,
-        backgroundColor: 'rgba(0,0,0,0.5)',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        zIndex: 9999,
-      }}
+  return (
+    <Modal
+      opened={isOpen}
+      onClose={onClose}
+      title={<Text fw={600} tt="capitalize">{pokemon.name}</Text>}
+      centered
+      size="md"
+      overlayProps={{ backgroundOpacity: 0.55, blur: 3 }}
+      radius="md"
+      padding={24} // Aumenta espacio general interno
+      style={{ position: 'relative' }}
     >
+      {/* Fondo gris claro desde mitad del muñeco hacia abajo */}
       <div
-        onClick={(e) => e.stopPropagation()}
         style={{
-          backgroundColor: 'white',
-          borderRadius: '8px',
-          padding: '2rem',
-          maxWidth: '400px',
-          width: '100%',
-          maxHeight: '80vh',
-          overflowY: 'auto',
+          position: 'absolute',
+          top: 150 / 2 + 56, // puedes ajustar este valor si el muñeco cambia de tamaño
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: '#f1f3f5',
+          borderTopLeftRadius: 30,
+          borderTopRightRadius: 30,
+          borderBottomLeftRadius: 0,
+          borderBottomRightRadius: 0,
+          zIndex: 0,
         }}
-      >
-        <button
-          onClick={onClose}
-          style={{ float: 'right', fontSize: '1.2rem', fontWeight: 'bold' }}
-          aria-label="Cerrar modal"
-        >
-          ×
-        </button>
+      />
 
-        <h2 style={{ textTransform: 'capitalize' }}>{pokemon.name}</h2>
-
-        <div style={{ display: 'flex', justifyContent: 'center', margin: '1rem 0' }}>
+      <Stack gap="md" style={{ position: 'relative', zIndex: 1 }}>
+        {/* Imagen */}
+        <Group justify="center" mb="sm">
           <Image
             src={pokemon.sprites.front_default}
             alt={pokemon.name}
             width={120}
             height={120}
-            priority
+            fit="contain"
           />
-        </div>
+        </Group>
 
-        <p>ID: #{pokemon.id}</p>
-        <p>Tipo(s): {pokemon.types.map((t) => t.type.name).join(', ')}</p>
-        <p>Altura: {(pokemon.height / 10).toFixed(1)} m</p>
-        <p>Peso: {(pokemon.weight / 10).toFixed(1)} kg</p>
-
-        <h3 style={{ marginTop: '1.5rem', marginBottom: '0.5rem', fontWeight: '600' }}>
-          Estadísticas base
-        </h3>
-
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-          {pokemon.stats.map((s) => (
-            <div key={s.stat.name}>
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  fontSize: '0.875rem',
-                }}
+        {/* ID y Tipos */}
+        <Group justify="space-between" px="xs">
+          <Text size="sm">ID: #{pokemon.id}</Text>
+          <Group gap="xs">
+            {pokemon.types.map((t) => (
+              <Badge
+                key={t.type.name}
+                color={typeColors[t.type.name] || 'blue'}
+                variant="light"
+                style={{ textTransform: 'capitalize' }}
               >
-                <span>{s.stat.name}</span>
-                <span>{s.base_stat}</span>
-              </div>
-              <div
-                style={{
-                  width: '100%',
-                  height: '8px',
-                  backgroundColor: '#e5e7eb',
-                  borderRadius: '4px',
-                }}
-              >
-                <div
-                  style={{
-                    width: `${(s.base_stat / 150) * 100}%`,
-                    height: '100%',
-                    backgroundColor: getStatColor(s.base_stat),
-                    borderRadius: '4px',
-                  }}
-                ></div>
-              </div>
+                {t.type.name}
+              </Badge>
+            ))}
+          </Group>
+        </Group>
+
+        {/* Altura y Peso */}
+        <Stack gap={6} px="xs">
+          <Text size="sm">Altura: {(pokemon.height / 10).toFixed(1)} m</Text>
+          <Text size="sm">Peso: {(pokemon.weight / 10).toFixed(1)} kg</Text>
+        </Stack>
+
+        {/* Estadísticas */}
+        <Stack gap="xs" mt="md" px="xs">
+          <Text fw={600}>Estadísticas base</Text>
+          {pokemon.stats.map((stat) => (
+            <div key={stat.stat.name}>
+              <Group justify="space-between" mb={4}>
+                <Text size="xs" c="dimmed">{stat.stat.name}</Text>
+                <Text size="xs">{stat.base_stat}</Text>
+              </Group>
+              <Progress
+                value={(stat.base_stat / 150) * 100}
+                color={getStatColor(stat.base_stat)}
+                radius="xl"
+              />
             </div>
           ))}
-        </div>
-      </div>
-    </div>,
-    document.body
+        </Stack>
+      </Stack>
+    </Modal>
   )
 }
 

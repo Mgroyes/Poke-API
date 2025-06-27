@@ -10,6 +10,7 @@ type Props = {
   options: string[]
   selectedType: string | null
   onChange: (value: string | null) => void
+  
 }
 
 const TypeFilter: React.FC<Props> = ({ options, selectedType, onChange }) => {
@@ -30,11 +31,16 @@ const TypeFilter: React.FC<Props> = ({ options, selectedType, onChange }) => {
         options={selectOptions}
         value={selectedOption}
         onChange={(selected: OptionType | null) => {
-            const value = selected?.value ?? null
-            onChange(value === '' ? null : value)
+          const value = selected?.value ?? null
+          onChange(value === '' ? null : value)
         }}
         isClearable
         placeholder="Filtrar por tipo..."
+        // 🔽 Añade estas dos props para que el menú no se corte
+        menuPortalTarget={typeof window !== 'undefined' ? document.body : null}
+        styles={{
+          menuPortal: base => ({ ...base, zIndex: 9999 }),
+        }}
       />
     </div>
   )
