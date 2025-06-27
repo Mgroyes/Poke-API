@@ -52,7 +52,7 @@ Construido con **React + Next.js**, **TypeScript** y la biblioteca de UI **Manti
 
 # Clonar el repositorio
 git clone https://github.com/tu-usuario/poke-api.git
-cd pokemon-explorer
+cd poke-api
 
 # Instalar dependencias
 npm install
