@@ -16,7 +16,7 @@ Construido con **React + Next.js**, **TypeScript** y la biblioteca de UI **Manti
 | [Axios](https://axios-http.com/) | Cliente HTTP basado en promesas para consumir APIs de manera sencilla                               |
 | [react-data-table-component](https://react-data-table-component.netlify.app/) | Tabla interactiva con paginación, ordenamiento y personalización                                   |
 | [react-select](https://react-select.com/) | Select avanzado con búsqueda, multi-select y customización                                         |
-| [PokéAPI](https://pokeapi.co/) | API RESTful con información completa de Pokémon                                                      |
+| [PokéAPI](https://pokeapi.co/) | API REST con información completa de Pokémon                                                      |
 | [Vercel](https://vercel.com/) | Plataforma de despliegue optimizada para aplicaciones Next.js                                        |
 
 ---
