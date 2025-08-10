@@ -51,7 +51,7 @@ Construido con **React + Next.js**, **TypeScript** y la biblioteca de UI **Manti
 🚀 Instalación y ejecución
 
 # Clonar el repositorio
-git clone https://github.com/tu-usuario/poke-api.git
+git clone https://github.com/Mgroyes/poke-api.git
 cd poke-api
 
 # Instalar dependencias
